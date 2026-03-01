@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ============================================================
+    🎓 STUDENT PORTFOLIO — ELECTRICAL ENGINEERING
+    All editable sections are marked with  ✏️ EDIT:
+  ============================================================ -->
+
+  <!-- ✏️ EDIT: Your name -->
+  <title>Aditya Salunke — EE Student Portfolio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:       #f4f3ef;
+      --paper:    #ffffff;
+      --ink:      #111110;
+      --muted:    #7a7972;
+      --faint:    #e8e6e0;
+      --accent:   #1a46a0;   /* ✏️ EDIT: swap to any colour you like */
+      --accent2:  #e8f0fe;
+      --mono:     'IBM Plex Mono', monospace;
+      --sans:     'Syne', sans-serif;
+      --serif:    'Instrument Serif', serif;
+      --r:        6px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 13.5px;
+      line-height: 1.75;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 99;
+      background: rgba(244,243,239,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--faint);
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto;
+      padding: 0.9rem clamp(1.2rem,5vw,3rem);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-family: var(--sans); font-weight: 800; font-size: 0.95rem;
+      text-decoration: none; color: var(--ink); letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted); font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── WRAPPER ── */
+    .wrap {
+      max-width: 1080px; margin: 0 auto;
+      padding: 0 clamp(1.2rem,5vw,3rem);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: clamp(4rem,10vw,7rem) 0 clamp(3rem,7vw,5rem);
+      border-bottom: 1px solid var(--faint);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--accent2); color: var(--accent);
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.35rem 0.85rem; border-radius: 100px; margin-bottom: 2rem;
+      font-family: var(--sans); font-weight: 500;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; }
+
+    h1 {
+      font-family: var(--sans); font-weight: 800;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.0; letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+    .hero-italic {
+      font-family: var(--serif); font-style: italic;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: var(--muted); display: block; margin-bottom: 1.75rem;
+    }
+    .hero-desc {
+      max-width: 520px; color: var(--muted);
+      font-size: 0.83rem; line-height: 1.85;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.25rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.7rem 1.5rem; font-family: var(--sans);
+      font-weight: 500; font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      transition: all 0.2s; border-radius: var(--r);
+    }
+    .btn-primary { background: var(--ink); color: var(--bg); }
+    .btn-primary:hover { background: var(--accent); }
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--faint);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem;
+    }
+    .chip {
+      font-size: 0.68rem; letter-spacing: 0.1em;
+      color: var(--muted); border: 1px solid var(--faint);
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+    }
+
+    /* ── SECTION SHARED ── */
+    .section { padding: clamp(3rem,7vw,5rem) 0; border-bottom: 1px solid var(--faint); }
+    .section:last-of-type { border-bottom: none; }
+
+    .s-head {
+      display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem;
+    }
+    .s-num {
+      font-family: var(--mono); font-size: 0.65rem;
+      color: var(--accent); letter-spacing: 0.15em;
+    }
+    h2 {
+      font-family: var(--sans); font-weight: 700;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      letter-spacing: -0.02em; line-height: 1.1;
+    }
+    .s-line {
+      flex: 1; height: 1px; background: var(--faint);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem;
+    }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p { color: var(--muted); font-size: 0.83rem; line-height: 1.9; }
+    .about-text p + p { margin-top: 0.9rem; }
+
+    .about-facts { display: flex; flex-direction: column; gap: 0; }
+    .fact {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.85rem 0; border-bottom: 1px solid var(--faint);
+      font-size: 0.75rem;
+    }
+    .fact:last-child { border-bottom: none; }
+    .fact-label { color: var(--muted); }
+    .fact-value { font-family: var(--sans); font-weight: 500; color: var(--ink); }
+
+    /* ── PROJECTS ── */
+    .project-filters {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;
+    }
+    .filter-btn {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.35rem 0.85rem; border-radius: 100px; cursor: pointer;
+      border: 1px solid var(--faint); background: transparent; color: var(--muted);
+      font-family: var(--mono); transition: all 0.15s;
+    }
+    .filter-btn.active,
+    .filter-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .proj-card {
+      background: var(--paper); border: 1px solid var(--faint);
+      border-radius: var(--r); padding: 1.6rem;
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .proj-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 24px rgba(26,70,160,0.08);
+      transform: translateY(-2px);
+    }
+
+    .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+    .proj-icon {
+      width: 40px; height: 40px; border-radius: var(--r);
+      background: var(--accent2); display: flex; align-items: center;
+      justify-content: center; font-size: 1.15rem;
+    }
+    .proj-type {
+      font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent2);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    .proj-title {
+      font-family: var(--sans); font-weight: 700;
+      font-size: 1.05rem; letter-spacing: -0.01em;
+      margin-bottom: 0.5rem; line-height: 1.2;
+    }
+    .proj-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; flex: 1; }
+
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .proj-tag {
+      font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--faint);
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+    }
+
+    .proj-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--faint);
+      font-size: 0.7rem; color: var(--muted);
+    }
+    .proj-link { color: var(--accent); text-decoration: none; }
+    .proj-link:hover { text-decoration: underline; }
+
+    /* ── SKILLS ── */
+    .skills-layout {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+      gap: 1.25rem;
+    }
+    .skill-card {
+      background: var(--paper); border: 1px solid var(--faint);
+      border-radius: var(--r); padding: 1.4rem;
+    }
+    .skill-card-header {
+      display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem;
+    }
+    .skill-icon {
+      width: 34px; height: 34px; border-radius: var(--r);
+      background: var(--accent2); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .skill-card-title {
+      font-family: var(--sans); font-weight: 600;
+      font-size: 0.8rem; letter-spacing: 0.02em;
+    }
+    .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem;
+    }
+    .skill-list li span:first-child { color: var(--muted); }
+    .skill-bar-wrap {
+      width: 60px; height: 3px; background: var(--faint);
+      border-radius: 2px; overflow: hidden;
+    }
+    .skill-bar {
+      height: 100%; background: var(--accent); border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ── COURSEWORK / RESEARCH ── */
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media (max-width: 640px) { .research-grid { grid-template-columns: 1fr; } }
+
+    .course-card {
+      background: var(--paper); border: 1px solid var(--faint);
+      border-radius: var(--r); padding: 1.4rem;
+    }
+    .course-semester {
+      font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .course-title {
+      font-family: var(--sans); font-weight: 600; font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .course-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.7; }
+    .course-grade {
+      display: inline-block; margin-top: 0.75rem;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); background: var(--accent2);
+      padding: 0.2rem 0.6rem; border-radius: 100px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+    @media (max-width: 620px) { .contact-wrap { grid-template-columns: 1fr; } }
+
+    .contact-note { font-size: 0.83rem; color: var(--muted); line-height: 1.85; }
+    .contact-note strong { color: var(--ink); font-family: var(--sans); }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .c-link {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 1.2rem; border: 1px solid var(--faint);
+      border-radius: var(--r); text-decoration: none; color: var(--ink);
+      transition: all 0.2s;
+    }
+    .c-link:hover { border-color: var(--accent); background: var(--accent2); }
+    .c-link-left { display: flex; align-items: center; gap: 0.75rem; }
+    .c-link-icon { font-size: 1rem; }
+    .c-link-label { font-family: var(--sans); font-weight: 500; font-size: 0.8rem; }
+    .c-link-sub { font-size: 0.68rem; color: var(--muted); }
+    .c-link-arr { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+    .c-link:hover .c-link-arr { transform: translateX(3px); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 0; text-align: center;
+      font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    [data-fade] { animation: fadeUp 0.55s ease both; }
+    [data-fade="1"] { animation-delay: 0.05s; }
+    [data-fade="2"] { animation-delay: 0.15s; }
+    [data-fade="3"] { animation-delay: 0.27s; }
+    [data-fade="4"] { animation-delay: 0.40s; }
+
+    /* ── RESPONSIVE NAV ── */
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ════════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <!-- ✏️ EDIT: Your initials or short name -->
+    <a class="nav-logo" href="#hero">YN<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ HERO ═══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="wrap">
+    <!-- ✏️ EDIT: Change badge text — e.g. "Open to Internships" or your university year -->
+    <div class="hero-badge" data-fade="1">Year 1 · Electrical Engineering Student</div>
+
+    <!-- ✏️ EDIT: Your name on line 1, your tagline on line 2 -->
+    <h1 data-fade="2">
+      Aditya Salunke
+      <span class="hero-italic">Exploring Machine Learning and Cyber-Physical systems</span>
+    </h1>
+
+    <!-- ✏️ EDIT: 2–3 sentence bio for the top of the page -->
+    <p class="hero-desc" data-fade="3">
+      Aspiring to be an Electrical Engineer who can make hardware think by AI.
+      I am tilted towards researching on how we can apply artificial intelligence and machine learning to Cybersecurity.
+      My long-term vision is in contributing to space research.
+      Actively looking to connect with research labs, student clubs, and internships in the areas of Cyber-Physical systems, Machine learning and Cybersecurity.
+    </p>
+
+    <div class="hero-actions" data-fade="4">
+      <!-- ✏️ EDIT: Link to your CV PDF or remove this button -->
+      <a class="btn btn-primary" href="your-cv.pdf" target="_blank">Download CV →</a>
+      <a class="btn btn-outline" href="#projects">See my projects</a>
+    </div>
+
+    <!-- ✏️ EDIT: Add/remove chips — quick-glance keywords -->
+    <div class="hero-chips" data-fade="4">
+      <span class="chip">Circuit Design</span>
+      <span class="chip">ESP32</span>
+      <span class="chip">Python</span>
+      <span class="chip">Cpp</span>
+      <span class="chip">MATLAB</span>
+      <span class="chip">Simulink</span>
+      <span class="chip">Overleaf</span>
+      <span class="chip">Onshape</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ═══════════════════════════════════════════════════ -->
+<section id="about" class="section">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="s-num">01</span>
+      <h2>About me</h2>
+      <span class="s-line"></span>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <!-- ✏️ EDIT: Your bio — be genuine, keep it conversational -->
+        <p>
+          Hi, I’m Aditya, an undergraduate student in Electrical Engineering at VJTI,
+          passionate about applying Machine learning in Cyber-Physical systems.
+          Aspiring to be an Electrical Engineer who can make hardware think by AI.
+          I am tilted towards researching on how we can apply artificial intelligence and machine learning to Cybersecurity
+        </p>
+        <p>
+          Currently, I am:
+          Exploring Cybersecurity fundamentals and it's application on Cyber-Physical systems.
+        </p>
+        <p>
+          Actively looking to connect with research labs, student clubs,
+          and internships in the areas of Cyber-Physical systems, Machine learning and Cybersecurity.
+
+        </p>
+      </div>
+
+      <!-- ✏️ EDIT: Update each fact-value with your real info -->
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-label">University</span>
+          <span class="fact-value">VJTI, Mumbai</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Degree</span>
+          <span class="fact-value">B.Tech Electrical Engineering</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Year</span>
+          <span class="fact-value">1st Year (2025–2026)</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Current GPA / Grade</span>
+          <span class="fact-value">First Class / 7.25 GPA</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Location</span>
+          <span class="fact-value">Mumbai, Maharashtra</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Availability</span>
+          <span class="fact-value">Summer 2026 internship</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ════════════════════════════════════════════════ -->
+<section id="projects" class="section">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="s-num">02</span>
+      <h2>Projects</h2>
+      <span class="s-line"></span>
+    </div>
+
+    <!-- Filter buttons — JS below handles show/hide by data-category -->
+    <div class="project-filters">
+      <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+      <button class="filter-btn" onclick="filterProjects('personal', this)">Personal</button>
+      <button class="filter-btn" onclick="filterProjects('team', this)">Team</button>
+      <button class="filter-btn" onclick="filterProjects('coding', this)">Coding</button>
+      <button class="filter-btn" onclick="filterProjects('academic', this)">Academic</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+
+      <!--
+        ✏️ EDIT EACH CARD:
+          data-category = personal | team | coding | academic  (can have multiple, space-separated)
+          proj-icon     = any emoji that fits your project
+          proj-type     = short label shown top right
+          proj-title    = project name
+          proj-desc     = 2–3 sentence description
+          proj-tags     = tech/tools used
+          href on proj-link = GitHub link, demo link, or "#" if none yet
+      -->
+
+      <!-- PROJECT 1 -->
+      <div class="proj-card" data-category="personal coding">
+        <div class="proj-header">
+          <div class="proj-icon">⚡</div>
+          <span class="proj-type">Personal · 2026</span>
+        </div>
+        <div class="proj-title">PRITHVI</div>
+        <div class="proj-desc">
+          Currently developing an autonomous mapping robot using SLAM concepts.
+          The project is structured in multiple phases:
+          • Phase 0 : Learning Simulink & Robotics Toolbox fundamentals
+          • Phase 1 : Designing and simulating a functional differential-drive robot
+          • Phase 2 : code generation using Simulink Coder and Reimplementing critical part in C.
+          • Phase 3 : Hardware implementation using MicroPython 
+          • Phase 4 : Integration of ML-assisted SLAM algorithms
+         Currently in Phase 0.5
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ESP32</span>
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Simulink</span>
+          <span class="proj-tag">Micropython</span>
+          <span class="proj-tag">SLAM</span>
+        </div>
+        <div class="proj-footer">
+          <span>Hardware + Software</span>
+          <a class="proj-link" href="#" target="_blank">https://github.com/Aditya-abs397/PRITHVI →</a>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="proj-card" data-category="team academic">
+        <div class="proj-header">
+          <div class="proj-icon">🤖</div>
+          <span class="proj-type">Team · 2025</span>
+        </div>
+        <div class="proj-title">Line-Following Self Balancing Robot</div>
+        <div class="proj-desc">
+          Designed and built WALL-E, a line-following robot as a first-year SRA group project.
+          This first step in exploring robotics which sparked me with curiosity about cyber-physical systems.
+        </div>
+        <div class="proj-tags">
+          <span class="proj-tag">ESP32</span>
+          <span class="proj-tag">PID Control</span>
+          <span class="proj-tag">C++</span>
+          <span class="proj-tag">MPU</span>
+          <span class="proj-tag">LSA</span>
+        </div>
+        <div class="proj-footer">
+          <span>4-person team</span>
+          <a class="https://github.com/SRA-VJTI/Wall-E" href="#" target="_blank">https://github.com/SRA-VJTI/Wall-E →</a>
+        </div>
+      </div>
+
+
+      <!-- ✏️ EDIT: Add more project cards by copying the block above -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SKILLS ═════════════════════════════════════════════════ -->
+<section id="skills" class="section">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="s-num">03</span>
+      <h2>Skills &amp; tools</h2>
+      <span class="s-line"></span>
+    </div>
+
+    <div class="skills-layout">
+
+      <!--
+        ✏️ EDIT EACH SKILL CARD:
+          skill-bar width = your rough proficiency % (be honest — recruiters appreciate it)
+          Add/remove <li> items as needed
+      -->
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🔌</div>
+          <div class="skill-card-title">Hardware</div>
+        </div>
+        <ul class="skill-list">
+          <li><span>Circuit Design</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></li>
+          <li><span>PCB Layout (KiCad)</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:55%"></div></div></li>
+          <li><span>Cad</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></li>
+          <li><span>Soldering</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">💻</div>
+          <div class="skill-card-title">Programming</div>
+        </div>
+        <ul class="skill-list">
+          <li><span>Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></li>
+          <li><span>C / C++ </span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></li>
+          <li><span>MATLAB</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></li>
+          <li><span>Verilog</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div></li>
+          <li><span>Simulink</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:40%"></div></div></li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">🛠️</div>
+          <div class="skill-card-title">Tools &amp; Platforms</div>
+        </div>
+        <ul class="skill-list">
+          <li><span>Micropython</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div></li>
+          <li><span>Git / GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></li>
+          <li><span>ESP32</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="skill-icon">📐</div>
+          <div class="skill-card-title">Engineering concepts</div>
+        </div>
+        <ul class="skill-list">
+          <li><span>Machine Learning</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:60%"></div></div></li>
+          <li><span>Cybersecurity</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div></li>
+          <li><span>CUDA</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:55%"></div></div></li>
+          <li><span>DSA</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:10%"></div></div></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ RESEARCH / COURSEWORK ═══════════════════════════════════ -->
+<section id="research" class="section">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="s-num">04</span>
+      <h2>Research &amp; coursework</h2>
+      <span class="s-line"></span>
+    </div>
+
+    <div class="research-grid">
+
+      <!--
+        ✏️ EDIT EACH CARD:
+          course-semester = when you took this / when you worked on it
+          course-title    = module or research topic name
+          course-desc     = what you did / learned / produced
+          course-grade    = your result (optional — remove the div if you'd rather not show it)
+      -->
+
+      <div class="course-card">
+        <div class="course-semester">Year 1 · Semester 1</div>
+        <div class="course-title">Basic Electrical Sciences</div>
+        <div class="course-desc">
+          Analysed DC/AC circuits using mesh and node analysis.Also explored transformers and rectifiers. Lab work included 
+          simulation of circuits and verifying kirchoff's law in real world.
+          Also build foundations for Electrical Engineering.
+        </div>
+      </div>
+
+       <div class="course-card">
+        <div class="course-semester">Year 1 · Semester 1</div>
+        <div class="course-title">Mathematics-I </div>
+        <div class="course-desc">
+         Built intuitive and strong foundations with a purpose to apply it in machine learning.
+        </div>
+      </div>
+
+
+      <div class="course-card">
+        <div class="course-semester">Year 1 · Semester 2</div>
+        <div class="course-title">Basic Electronics</div>
+        <div class="course-desc">
+          Covered Boolean algebra, combinational and sequential logic
+        </div>
+        <span class="course-grade">Grade: 82%</span>
+      </div>
+
+      <div class="course-card">
+        <div class="course-semester">Year 1 · Sem II</div>
+        <div class="course-title">Mathematics-II</div>
+        <div class="course-desc">
+          Studied Complex Analysis and Vector Calculus and its application in Electrical Engineering and AI
+        </div>
+        <span class="course-grade">In Progress</span>
+      </div>
+
+      
+      <div class="course-card">
+        <div class="course-semester">Year 1 · Sem II</div>
+        <div class="course-title">Department Specific Workshops</div>
+        <div class="course-desc">
+          Weekly labs where i learned real world electrical engineering, and testing our knowledge with a group project.
+        </div>
+        <span class="course-grade">In Progress</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════════════ -->
+<section id="contact" class="section">
+  <div class="wrap">
+    <div class="s-head">
+      <span class="s-num">05</span>
+      <h2>Get in touch</h2>
+      <span class="s-line"></span>
+    </div>
+
+    <div class="contact-wrap">
+      <!-- ✏️ EDIT: Your contact message -->
+      <div class="contact-note">
+        <p>
+          <strong>Open to internships, placements &amp; collaborations.</strong><br/><br/>
+          Whether you're a recruiter, a fellow student looking to team up on a project,
+          or anyone curious about my work — feel free to reach out. I'm always happy
+          to chat about engineering, projects, or anything.
+        </p>
+      </div>
+
+      <!-- ✏️ EDIT: Replace each href and label with your real links -->
+      <div class="contact-links">
+        <a class="c-link" href="mailto:you@email.com">
+          <div class="c-link-left">
+            <span class="c-link-icon">✉️</span>
+            <div>
+              <div class="c-link-label">Email</div>
+              <div class="c-link-sub">adisalunke07@gmail.com</div>
+            </div>
+          </div>
+          <span class="c-link-arr">→</span>
+        </a>
+
+        <a class="c-link" href="https://linkedin.com/in/yourhandle" target="_blank">
+          <div class="c-link-left">
+            <span class="c-link-icon">💼</span>
+            <div>
+              <div class="c-link-label">LinkedIn</div>
+              <div class="c-link-sub">https://www.linkedin.com/in/aditya-salunke-17a713382/</div>
+            </div>
+          </div>
+          <span class="c-link-arr">→</span>
+        </a>
+
+        <a class="c-link" href="https://github.com/yourhandle" target="_blank">
+          <div class="c-link-left">
+            <span class="c-link-icon">🐙</span>
+            <div>
+              <div class="c-link-label">GitHub</div>
+              <div class="c-link-sub">github.com/Aditya-abs397</div>
+            </div>
+          </div>
+          <span class="c-link-arr">→</span>
+        </a>
+
+        <!-- ✏️ EDIT: Optional — add your university profile, portfolio PDF, etc. -->
+        <a class="c-link" href="your-cv.pdf" target="_blank">
+          <div class="c-link-left">
+            <span class="c-link-icon">📄</span>
+            <div>
+              <div class="c-link-label">Download CV</div>
+              <div class="c-link-sub">PDF · Updated 2026</div>
+            </div>
+          </div>
+          <span class="c-link-arr">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════════ -->
+<footer>
+  <!-- ✏️ EDIT: Your name -->
+  <p>© 2025 Aditya Salunke · Built with HTML, CSS &amp; a bit of ambition</p>
+</footer>
+
+<!-- ══ PROJECT FILTER SCRIPT ══════════════════════════════════ -->
+<script>
+  function filterProjects(category, btn) {
+    // Update button states
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Show/hide cards
+    document.querySelectorAll('.proj-card').forEach(card => {
+      const cats = card.dataset.category || '';
+      if (category === 'all' || cats.includes(category)) {
+        card.style.display = 'flex';
+        card.style.animation = 'fadeUp 0.3s ease both';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
